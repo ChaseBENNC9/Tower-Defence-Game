@@ -40,7 +40,7 @@ public class SpawnEnemy : MonoBehaviour
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || (enemiesSpawned != 0 && timeInterval > spawnInterval)) && 
             (enemiesSpawned < waves[currentWave].maxEnemies))
             {
-
+                lastSpawnTime = Time.time;
                 GameObject newEnemy = (GameObject)Instantiate(waves[currentWave].enemyPrefab);
                 newEnemy.GetComponent<MoveEnemy>().waypoints = waypoints;
                 enemiesSpawned++;
