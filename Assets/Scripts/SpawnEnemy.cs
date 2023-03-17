@@ -6,9 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class Wave
 {
-    public GameObject enemyPrefab;
     public float spawnInterval = 2;
     public int maxEnemies = 20;
+    public List<GameObject> enemyTypes; //A list that contains all the types of enemies
 }
 
 public class SpawnEnemy : MonoBehaviour
@@ -16,7 +16,7 @@ public class SpawnEnemy : MonoBehaviour
 
     public Wave[] waves;
     public int timeBetweenWaves = 5;
-
+    private int index = 0;
     private GameManagerBehaviour gameManager;
 
     private float lastSpawnTime;
@@ -37,14 +37,26 @@ public class SpawnEnemy : MonoBehaviour
         {
             float timeInterval = Time.time - lastSpawnTime;
             float spawnInterval = waves[currentWave].spawnInterval;
+
+
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || (enemiesSpawned != 0 && timeInterval > spawnInterval)) && 
             (enemiesSpawned < waves[currentWave].maxEnemies))
             {
+                print(index);
                 lastSpawnTime = Time.time;
-                GameObject newEnemy = (GameObject)Instantiate(waves[currentWave].enemyPrefab);
+                GameObject newEnemy = (GameObject)Instantiate(waves[currentWave].enemyTypes[index]);
+                if(index < waves[currentWave].enemyTypes.Count - 1)
+                {
+                    index++;
+                }
+                else 
+                {
+                    index = 0;
+                }
                 newEnemy.GetComponent<MoveEnemy>().waypoints = waypoints;
                 enemiesSpawned++;
             }
+            
             if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 gameManager.Wave++;
