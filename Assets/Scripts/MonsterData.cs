@@ -1,3 +1,4 @@
+//The purpose of this script is to manage the monster and it's current state.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +31,7 @@ public class MonsterData : MonoBehaviour
         
         for (int i = 0; i < levels.Count; i++)
         {
-        if (levelVisualization != null) 
+        if (levelVisualization != null) //Hides the sprites for the other levels so only the current level sprite is shown.
             if (i == currentLevelIndex)         
             levels[i].visualization.SetActive(true);        
             else        
@@ -40,12 +41,12 @@ public class MonsterData : MonoBehaviour
     
     }
 
-   void OnEnable()
+   void OnEnable() 
     {
         CurrentLevel = levels[0];
     } 
 
-    public MonsterLevel GetNextLevel()
+    public MonsterLevel GetNextLevel() //Returns the Next level available to the monster
     {
         int currentLevelIndex = levels.IndexOf(currentLevel);
         int maxLevelIndex = levels.Count - 1;
@@ -59,7 +60,7 @@ public class MonsterData : MonoBehaviour
         }
     }
 
-    public void IncreaseLevel()
+    public void IncreaseLevel() //Increases the level to the next value
     {
         int currentLevelIndex = levels.IndexOf(currentLevel);
         if (currentLevelIndex < levels.Count - 1)

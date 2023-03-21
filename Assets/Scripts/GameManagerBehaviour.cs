@@ -1,3 +1,4 @@
+//The purpsoe of this script is to manage the main game. it manages the player's gold, current wave and current Health.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class GameManagerBehaviour : MonoBehaviour
     public Text healthLabel;
     public GameObject[] healthIndicator;  
     public GameObject[] nextWaveLabels;
-    private int gold;
+    private int gold; //The player's gold, this can be used to create or upgrade new units (Monsters) to help the player complete the wave, can be awarded for destroying enemies or winning a wave
     public int Gold 
     {
 
@@ -25,8 +26,8 @@ public class GameManagerBehaviour : MonoBehaviour
     }
 
 
-    private int wave;
-    public int Wave
+    private int wave; //The current wave, This increases after each wave is completed and increases the difficulty over time.
+    public int Wave 
     {
         get { return wave; }
         set
@@ -44,7 +45,7 @@ public class GameManagerBehaviour : MonoBehaviour
     }
 
 
-    private int health;
+    private int health; //The Health of the player, when this reaches 0 the game will be over.
     public int Health
     {
         get { return health; }
@@ -74,7 +75,7 @@ public class GameManagerBehaviour : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Start() //initial values
     {
         Gold = 1000;
         Wave = 0;
@@ -82,9 +83,4 @@ public class GameManagerBehaviour : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

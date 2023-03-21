@@ -1,3 +1,4 @@
+//The purpose of this script is to allow the monsters to shoot at enemies
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class ShootEnemies : MonoBehaviour
     {
         GameObject target = null;
         float minimalEnemyDistance = float.MaxValue;
-        foreach (GameObject enemy in enemiesInRange)
+        foreach (GameObject enemy in enemiesInRange) //tests every enemy within its range and find's the closest enemy to the goal. Sets that enemy as it's current target.
         {
             float distanceToGoal = enemy.GetComponent<MoveEnemy>().DistanceToGoal();
             if (distanceToGoal < minimalEnemyDistance)
@@ -30,7 +31,7 @@ public class ShootEnemies : MonoBehaviour
             }
         }
 
-        if (target != null)
+        if (target != null)//when the monster has a target and the cooldown is 0, start shooting at enemy.
         {
             if (Time.time - lastShotTime > monsterData.CurrentLevel.fireRate)
             {
@@ -43,20 +44,20 @@ public class ShootEnemies : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D (Collider2D other)
+    void OnTriggerEnter2D (Collider2D other) //adds any enemies that enter the monster's trigger collider to the within range list
     {
         if (other.gameObject.tag.Equals("Enemy"))
             enemiesInRange.Add(other.gameObject);
     }
 
-    void OnTriggerExit2D (Collider2D other)
+    void OnTriggerExit2D (Collider2D other) //removes an enemy that leaves the trigger from the within range list
     {
         if (other.gameObject.tag.Equals("Enemy"))
             enemiesInRange.Remove(other.gameObject);
     }
 
 
-    void Shoot(Collider2D target)
+    void Shoot(Collider2D target) //shoots a bullet at the set target
     {
         GameObject bulletPrefab = monsterData.CurrentLevel.bullet;
         Vector3 startPosition = gameObject.transform.position;
