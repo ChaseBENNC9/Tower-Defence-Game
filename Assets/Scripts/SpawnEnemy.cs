@@ -40,12 +40,12 @@ public class SpawnEnemy : MonoBehaviour //the spawnenemy class spawns in the ene
             float spawnInterval = waves[currentWave].spawnInterval;
 
 
-            if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || (enemiesSpawned != 0 && timeInterval > spawnInterval)) && 
+            if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || (enemiesSpawned != 0 && timeInterval > spawnInterval)) &&
             (enemiesSpawned < waves[currentWave].maxEnemies))
             {
                 lastSpawnTime = Time.time;
                 GameObject newEnemy = (GameObject)Instantiate(waves[currentWave].enemyTypes[enemyTypeIndex]);
-                if(enemyTypeIndex < waves[currentWave].enemyTypes.Count - 1) //This will increment each time an enemy is spawned and change the type 
+                if (enemyTypeIndex < waves[currentWave].enemyTypes.Count - 1) //This will increment each time an enemy is spawned and change the type 
                 {
                     enemyTypeIndex++;
                 }
@@ -56,7 +56,7 @@ public class SpawnEnemy : MonoBehaviour //the spawnenemy class spawns in the ene
                 newEnemy.GetComponent<MoveEnemy>().waypoints = waypoints; //sets the waypoints of the spawned enemy to the waypoints in the scene.
                 enemiesSpawned++;
             }
-            
+
             if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Enemy") == null) //When there are no enemies left and no more wll be spawned 
             {
                 gameManager.Wave++; //increase the wave

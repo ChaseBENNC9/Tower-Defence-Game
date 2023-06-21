@@ -13,10 +13,10 @@ public class MonsterLevel
 }
 public class MonsterData : MonoBehaviour
 {
-    private MonsterLevel currentLevel;
-    public List<MonsterLevel> levels;
+    public List<MonsterLevel> levels; //The Available levels of the monster
 
 
+    private MonsterLevel currentLevel; //The Level the monster is currently at
     public MonsterLevel CurrentLevel
     {
 

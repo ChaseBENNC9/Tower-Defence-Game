@@ -19,13 +19,13 @@ public class MoveEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 startPosition = waypoints [currentWaypoint].transform.position; //the current position of the enemy
-        Vector3 endPosition = waypoints [currentWaypoint + 1].transform.position; // the target position of the enemy
+        Vector3 startPosition = waypoints[currentWaypoint].transform.position; //the current position of the enemy
+        Vector3 endPosition = waypoints[currentWaypoint + 1].transform.position; // the target position of the enemy
 
-        float pathLength = Vector3.Distance (startPosition, endPosition); //calculate the distance between the two points
+        float pathLength = Vector3.Distance(startPosition, endPosition); //calculate the distance between the two points
         float totalTimeForPath = pathLength / speed; //calculate the time taken to travel between the points
         float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
-        gameObject.transform.position = Vector2.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
+        gameObject.transform.position = Vector2.Lerp(startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
 
         if (gameObject.transform.position.Equals(endPosition))  //When the enemy reaches it's target
         {
@@ -60,13 +60,13 @@ public class MoveEnemy : MonoBehaviour
 
     private void RotateIntoMoveDirection() //rotates the enemy so it will always face the direction of it's movement.
     {
-        Vector3 newStartPosition = waypoints [currentWaypoint].transform.position;
-        Vector3 newEndPosition = waypoints [currentWaypoint + 1].transform.position;
+        Vector3 newStartPosition = waypoints[currentWaypoint].transform.position;
+        Vector3 newEndPosition = waypoints[currentWaypoint + 1].transform.position;
         Vector3 newDirection = (newEndPosition - newStartPosition);
 
         float x = newDirection.x;
         float y = newDirection.y;
-        float rotationAngle = Mathf.Atan2 (y, x) * 180 / Mathf.PI;
+        float rotationAngle = Mathf.Atan2(y, x) * 180 / Mathf.PI;
 
         GameObject sprite = gameObject.transform.Find("Sprite").gameObject;
         sprite.transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);

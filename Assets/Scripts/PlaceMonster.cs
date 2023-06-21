@@ -31,7 +31,7 @@ public class PlaceMonster : MonoBehaviour
             MonsterLevel nextLevel = monsterData.GetNextLevel();
             if (nextLevel != null)
             {
-            return gameManager.Gold >= nextLevel.cost;
+                return gameManager.Gold >= nextLevel.cost;
             }
         }
         return false;
@@ -41,7 +41,7 @@ public class PlaceMonster : MonoBehaviour
     {
         if (CanPlaceMonster())
         {
-            monster = (GameObject)Instantiate(monsterPrefab, transform.position,Quaternion.identity); //creates a new instance of the monster in the current position and deducts the gold
+            monster = (GameObject)Instantiate(monsterPrefab, transform.position, Quaternion.identity); //creates a new instance of the monster in the current position and deducts the gold
             gameManager.Gold -= monster.GetComponent<MonsterData>().CurrentLevel.cost;
 
             AudioSource audioSource = gameObject.GetComponent<AudioSource>();

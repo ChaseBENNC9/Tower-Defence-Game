@@ -35,22 +35,22 @@ public class ShootEnemies : MonoBehaviour
         {
             if (Time.time - lastShotTime > monsterData.CurrentLevel.fireRate)
             {
-            Shoot(target.GetComponent<Collider2D>());
-            lastShotTime = Time.time;
+                Shoot(target.GetComponent<Collider2D>());
+                lastShotTime = Time.time;
             }
             Vector3 direction = gameObject.transform.position - target.transform.position;
-            gameObject.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2 (direction.y, direction.x) * 180 / Mathf.PI, new Vector3 (0, 0, 1));
+            gameObject.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI, new Vector3(0, 0, 1));
         }
     }
 
 
-    void OnTriggerEnter2D (Collider2D other) //adds any enemies that enter the monster's trigger collider to the within range list
+    void OnTriggerEnter2D(Collider2D other) //adds any enemies that enter the monster's trigger collider to the within range list
     {
         if (other.gameObject.tag.Equals("Enemy"))
             enemiesInRange.Add(other.gameObject);
     }
 
-    void OnTriggerExit2D (Collider2D other) //removes an enemy that leaves the trigger from the within range list
+    void OnTriggerExit2D(Collider2D other) //removes an enemy that leaves the trigger from the within range list
     {
         if (other.gameObject.tag.Equals("Enemy"))
             enemiesInRange.Remove(other.gameObject);

@@ -10,15 +10,15 @@ public class GameManagerBehaviour : MonoBehaviour
     public Text waveLabel;
     public bool gameOver = false;
     public Text healthLabel;
-    public GameObject[] healthIndicator;  
+    public GameObject[] healthIndicator;
     public GameObject[] nextWaveLabels;
     private int gold; //The player's gold, this can be used to create or upgrade new units (Monsters) to help the player complete the wave, can be awarded for destroying enemies or winning a wave
-    public int Gold 
+    public int Gold
     {
 
-        get {return gold; }
+        get { return gold; }
 
-        set 
+        set
         {
             gold = value;
             goldLabel.GetComponent<Text>().text = "GOLD: " + gold;
@@ -27,7 +27,7 @@ public class GameManagerBehaviour : MonoBehaviour
 
 
     private int wave; //The current wave, This increases after each wave is completed and increases the difficulty over time.
-    public int Wave 
+    public int Wave
     {
         get { return wave; }
         set
@@ -35,10 +35,10 @@ public class GameManagerBehaviour : MonoBehaviour
             wave = value;
             if (!gameOver)
             {
-            for (int i = 0; i < nextWaveLabels.Length; i++)
-            {
-                nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
-            }
+                for (int i = 0; i < nextWaveLabels.Length; i++)
+                {
+                    nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
+                }
             }
             waveLabel.text = "WAVE: " + (wave + 1);
         }
@@ -51,25 +51,25 @@ public class GameManagerBehaviour : MonoBehaviour
         get { return health; }
         set
         {
-            if (value < health)    
-            Camera.main.GetComponent<CameraShake>().Shake();
-            
+            if (value < health)
+                Camera.main.GetComponent<CameraShake>().Shake();
+
             health = value;
             healthLabel.text = "HEALTH: " + health;
 
             if (health <= 0 && !gameOver)
             {
-            gameOver = true;
-            GameObject gameOverText = GameObject.FindGameObjectWithTag("GameOver");
-            gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
+                gameOver = true;
+                GameObject gameOverText = GameObject.FindGameObjectWithTag("GameOver");
+                gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
             }
 
             for (int i = 0; i < healthIndicator.Length; i++)
             {
-            if (i < Health)
-                healthIndicator[i].SetActive(true);
-            else
-                healthIndicator[i].SetActive(false);
+                if (i < Health)
+                    healthIndicator[i].SetActive(true);
+                else
+                    healthIndicator[i].SetActive(false);
             }
         }
     }

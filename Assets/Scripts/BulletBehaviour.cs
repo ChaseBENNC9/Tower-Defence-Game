@@ -23,14 +23,14 @@ public class BulletBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update() //Movement of the bullet
     {
-        transform.position += normalizeDirection * speed * Time.deltaTime; 
+        transform.position += normalizeDirection * speed * Time.deltaTime;
     }
 
 
     void OnTriggerEnter2D(Collider2D other) //When the bullet enters a trigger collider it checks if it is an enemy and decreases it's health
     {
         target = other.gameObject;
-        if(target.tag.Equals("Enemy"))
+        if (target.tag.Equals("Enemy"))
         {
             Transform healthBarTransform = target.transform.Find("HealthBar");
             HealthBar healthBar = healthBarTransform.gameObject.GetComponent<HealthBar>();
@@ -42,7 +42,7 @@ public class BulletBehaviour : MonoBehaviour
                 AudioSource audioSource = target.GetComponent<AudioSource>();
                 AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
                 gameManager.Gold += 50; //Rewards the player with gold
-            }  
+            }
             Destroy(gameObject); //destroys the bullet gameobject
         }
     }
